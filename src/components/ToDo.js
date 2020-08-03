@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import ToDoForm from './ToDoForm';
-import ListOfTodos from './ListOfTodos';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState } from "react";
+import ToDoForm from "./ToDoForm";
+import ListOfTodos from "./ListOfTodos";
+import { v4 as uuidv4 } from "uuid";
 
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
 const mainTodos = [
   {
-    category: 'shopping',
+    category: "shopping",
     id: uuidv4(),
     completed: false,
-    task: 'buy and eggs',
+    task: "buy and eggs",
   },
   {
-    category: 'shopping',
+    category: "shopping",
     id: uuidv4(),
     completed: false,
-    task: 'buy and oranges test',
+    task: "buy and oranges test",
   },
 ];
 
 const ToDo = () => {
   const [todos, setTodos] = useState(mainTodos);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
 
   const handleChange = e => {
     setInputText(e.target.value);
@@ -32,17 +32,17 @@ const ToDo = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (inputText === '') return;
+    if (inputText === "") return;
     setTodos([
       ...todos,
       {
-        category: 'shopping',
+        category: "shopping",
         id: uuidv4(),
         task: inputText,
         completed: false,
       },
     ]);
-    setInputText('');
+    setInputText("");
   };
 
   const clearItems = () => {
@@ -57,7 +57,7 @@ const ToDo = () => {
   return (
     <Container maxWidth="sm">
       <Box m={3}>
-        <Card style={{ padding: '25px' }}>
+        <Card style={{ padding: "25px" }}>
           <Typography variant="h5" color="initial">
             Your Todo lists
           </Typography>
