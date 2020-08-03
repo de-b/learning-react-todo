@@ -11,18 +11,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ToDoForm() {
+function ToDoForm({ inputText, handleChange, handleSubmit }) {
   const classes = useStyles();
   return (
-    <form noValidate autoComplete="off">
+    <form onSubmit={handleSubmit} noValidate autoComplete="off">
       <TextField
         className={classes.fullWidth}
         id="standard-basic"
         label="Add Todo item"
+        value={inputText}
+        onChange={handleChange}
       />
-      <Button variant="contained" color="primary">
-        Submit
-      </Button>
+      <button>Submit</button>
     </form>
   );
 }
