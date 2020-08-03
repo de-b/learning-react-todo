@@ -26,14 +26,22 @@ const ToDo = () => {
   const [todos, setTodos] = useState(mainTodos);
   const [inputText, setInputText] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (inputText === "") return;
-    setTodos([...todos, { task: inputText }]);
+    setTodos([
+      ...todos,
+      {
+        category: "shopping",
+        id: uuidv4(),
+        task: inputText,
+        completed: false,
+      },
+    ]);
     setInputText("");
   };
 
@@ -41,8 +49,8 @@ const ToDo = () => {
     setTodos([]);
   };
 
-  const deleteItem = (id) => {
-    let temp = todos.filter((item) => item.id !== id);
+  const deleteItem = id => {
+    let temp = todos.filter(item => item.id !== id);
     setTodos(temp);
   };
 
