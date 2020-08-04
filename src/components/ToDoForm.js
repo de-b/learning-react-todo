@@ -22,7 +22,9 @@ function ToDoForm({ inputText, handleChange, handleSubmit }) {
         value={inputText}
         onChange={handleChange}
       />
-      <button>Submit</button>
+      <Button variant="contained" color="primary">
+        Submit
+      </Button>
     </form>
   );
 }
