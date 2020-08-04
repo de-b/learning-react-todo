@@ -18,9 +18,11 @@ function ListOfTodos(props) {
           />
         ))}
       </ul>
-      <Button onClick={clearItems} variant="contained" color="secondary">
-        Clear List Items
-      </Button>
+      {todos.length > 0 && (
+        <Button onClick={clearItems} variant="contained" color="secondary">
+          Clear List Items
+        </Button>
+      )}
     </div>
   );
 }
