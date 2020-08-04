@@ -4,7 +4,7 @@ import ToDoItem from "./ToDoItem";
 import Button from "@material-ui/core/Button";
 
 function ListOfTodos(props) {
-  const { todos, clearItems, deleteItem } = props;
+  const { todos, clearItems, deleteItem, editItem } = props;
 
   return (
     <div style={{ marginTop: "40px" }}>
@@ -14,7 +14,8 @@ function ListOfTodos(props) {
             key={item.id}
             id={item.id}
             task={item.task}
-            deleteItem={(id) => deleteItem(item.id)}
+            deleteItem={() => deleteItem(item.id)}
+            editItem={() => editItem(item.id)}
           />
         ))}
       </ul>
