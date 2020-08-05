@@ -14,3 +14,26 @@ ul.todoLists li span button {
   margin: 0 2px;
   display: inline-block;
 }
+
+.alert {
+  padding: 10px 20px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.alert-success {
+  background-color: rgb(120, 190, 8);
+}
+.alert-danger {
+  background-color: rgb(231, 74, 12);
+}
+button.btn {
+  display: inline-block;
+  padding: 12px 2rem;
+  background: #3f51b5;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

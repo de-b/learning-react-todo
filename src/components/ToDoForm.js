@@ -22,7 +22,8 @@ function ToDoForm({ inputText, handleChange, handleSubmit }) {
         value={inputText}
         onChange={handleChange}
       />
-      <button>Submit</button>
+      {/* <Button variant="outlined">Submit</Button> */}
+      <button className="btn">Submit</button>
     </form>
   );
 }
