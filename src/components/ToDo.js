@@ -8,23 +8,23 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
-// const mainTodos = [
-//   {
-//     category: "shopping",
-//     id: uuidv4(),
-//     completed: false,
-//     task: "buy and eggs",
-//   },
-//   {
-//     category: "shopping",
-//     id: uuidv4(),
-//     completed: false,
-//     task: "buy and oranges test",
-//   },
-// ];
+const mainTodos = [
+  {
+    category: "shopping",
+    id: uuidv4(),
+    completed: false,
+    task: "buy and eggs",
+  },
+  {
+    category: "shopping",
+    id: uuidv4(),
+    completed: false,
+    task: "buy and oranges test",
+  },
+];
 
 const ToDo = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(mainTodos);
   const [inputText, setInputText] = useState("");
   const [alert, setAlert] = useState({ show: false });
 
@@ -70,6 +70,12 @@ const ToDo = () => {
     handleAlert({ type: "danger", text: "item deleted" });
   };
 
+  const editItem = (id) => {
+    //console.log(id);
+    const singleItem = todos.find((item) => item.id === id);
+    console.log(singleItem);
+  };
+
   return (
     <Container maxWidth="sm">
       <Box m={3}>
@@ -87,6 +93,7 @@ const ToDo = () => {
             todos={todos}
             clearItems={clearItems}
             deleteItem={deleteItem}
+            editItem={editItem}
           />
         </Card>
       </Box>

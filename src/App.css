@@ -8,7 +8,10 @@ ul.todoLists li {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: solid 1px #eee;
+  align-items: center;
+  font-size: 15px;
 }
 ul.todoLists li span button {
   margin: 0 2px;
