@@ -11,10 +11,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ToDoForm({ inputText, handleChange, handleSubmit }) {
+function ToDoForm({ inputText, handleChange, handleSubmit, editingItem }) {
   const classes = useStyles();
   return (
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
+      {/* {editingItem ? JSON.stringify(editingItem) : "not editing"} */}
+
       <TextField
         className={classes.fullWidth}
         id="standard-basic"
@@ -23,7 +25,7 @@ function ToDoForm({ inputText, handleChange, handleSubmit }) {
         onChange={handleChange}
       />
       {/* <Button variant="outlined">Submit</Button> */}
-      <button className="btn">Submit</button>
+      <button className="btn">{editingItem ? "Edit" : "Submit"}</button>
     </form>
   );
 }
