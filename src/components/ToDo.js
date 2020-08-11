@@ -8,25 +8,27 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
-// const mainTodos = [
-//   {
-//     category: "shopping",
-//     id: uuidv4(),
-//     completed: false,
-//     task: "buy and eggs",
-//   },
-//   {
-//     category: "shopping",
-//     id: uuidv4(),
-//     completed: false,
-//     task: "buy and oranges test",
-//   },
-// ];
+const mainTodos = [
+  {
+    category: "shopping",
+    id: uuidv4(),
+    completed: false,
+    task: "buy and eggs",
+  },
+  {
+    category: "shopping",
+    id: uuidv4(),
+    completed: false,
+    task: "buy and oranges test",
+  },
+];
 
 const ToDo = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(mainTodos);
   const [inputText, setInputText] = useState("");
   const [alert, setAlert] = useState({ show: false });
+  const [editingItem, setEditingItem] = useState(false);
+  const [id, setId] = useState(0);
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -39,17 +41,29 @@ const ToDo = () => {
         type: "danger",
         text: "Please add something to the task",
       });
-    setTodos([
-      ...todos,
-      {
-        category: "shopping",
-        id: uuidv4(),
-        task: inputText,
-        completed: false,
-      },
-    ]);
+
+    if (editingItem) {
+      const tempTodos = todos.map((item) => {
+        return item.id === id ? { ...todos, task: inputText } : item;
+        //if id matches then it will only update taks field and rest item will be used
+      });
+      setTodos(tempTodos);
+      setEditingItem(false);
+      handleAlert({ type: "success", text: "successfully updated" });
+    } else {
+      setTodos([
+        ...todos,
+        {
+          category: "shopping",
+          id: uuidv4(),
+          task: inputText,
+          completed: false,
+        },
+      ]);
+      handleAlert({ type: "success", text: "successfully added" });
+    }
+
     setInputText("");
-    handleAlert({ type: "success", text: "successfully added" });
   };
 
   const handleAlert = ({ type, text }) => {
@@ -68,6 +82,16 @@ const ToDo = () => {
     let temp = todos.filter((item) => item.id !== id);
     setTodos(temp);
     handleAlert({ type: "danger", text: "item deleted" });
+    setInputText("");
+  };
+
+  const handleEdit = (id) => {
+    //console.log(id);
+    const singleItem = todos.find((item) => item.id === id);
+    setEditingItem(true);
+    setId(id);
+
+    setInputText(singleItem.task);
   };
 
   return (
@@ -82,11 +106,14 @@ const ToDo = () => {
             inputText={inputText}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            editingItem={editingItem}
+            handleEdit={handleEdit}
           />
           <ListOfTodos
             todos={todos}
             clearItems={clearItems}
             deleteItem={deleteItem}
+            handleEdit={handleEdit}
           />
         </Card>
       </Box>
