@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToDoForm from "./ToDoForm";
 import ListOfTodos from "./ListOfTodos";
 import Alert from "./Alert";
@@ -8,27 +8,21 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
-const mainTodos = [
-  {
-    category: "shopping",
-    id: uuidv4(),
-    completed: false,
-    task: "buy and eggs",
-  },
-  {
-    category: "shopping",
-    id: uuidv4(),
-    completed: false,
-    task: "buy and oranges test",
-  },
-];
+const mainTodos = localStorage.getItem("todos")
+  ? JSON.parse(localStorage.getItem("todos"))
+  : [];
 
 const ToDo = () => {
   const [todos, setTodos] = useState(mainTodos);
   const [inputText, setInputText] = useState("");
   const [alert, setAlert] = useState({ show: false });
-  const [editingItem, setEditingItem] = useState(false);
+  const [itemToEdit, setItemToEdit] = useState(false);
   const [id, setId] = useState(0);
+
+  useEffect(() => {
+    console.log("useEffect run");
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -42,13 +36,13 @@ const ToDo = () => {
         text: "Please add something to the task",
       });
 
-    if (editingItem) {
+    if (itemToEdit) {
       const tempTodos = todos.map((item) => {
         return item.id === id ? { ...todos, task: inputText } : item;
         //if id matches then it will only update taks field and rest item will be used
       });
       setTodos(tempTodos);
-      setEditingItem(false);
+      setItemToEdit(false);
       handleAlert({ type: "success", text: "successfully updated" });
     } else {
       setTodos([
@@ -88,9 +82,8 @@ const ToDo = () => {
   const handleEdit = (id) => {
     //console.log(id);
     const singleItem = todos.find((item) => item.id === id);
-    setEditingItem(true);
+    setItemToEdit(true);
     setId(id);
-
     setInputText(singleItem.task);
   };
 
@@ -106,7 +99,7 @@ const ToDo = () => {
             inputText={inputText}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
-            editingItem={editingItem}
+            itemToEdit={itemToEdit}
             handleEdit={handleEdit}
           />
           <ListOfTodos
