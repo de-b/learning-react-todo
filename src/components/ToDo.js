@@ -3,6 +3,7 @@ import ToDoForm from "./ToDoForm";
 import ListOfTodos from "./ListOfTodos";
 import Alert from "./Alert";
 import { v4 as uuidv4 } from "uuid";
+import LoginForm from "./LoginForm";
 
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -13,6 +14,7 @@ const mainTodos = localStorage.getItem("todos")
   : [];
 
 const ToDo = () => {
+  const [userLogin, setUserLogin] = useState(false);
   const [todos, setTodos] = useState(mainTodos);
   const [inputText, setInputText] = useState("");
   const [alert, setAlert] = useState({ show: false });
@@ -92,22 +94,28 @@ const ToDo = () => {
       <Box m={3}>
         {alert.show && <Alert alert={alert} />}
         <Card style={{ padding: "25px" }}>
-          <Typography variant="h5" color="initial">
-            Your Todo lists
-          </Typography>
-          <ToDoForm
-            inputText={inputText}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            itemToEdit={itemToEdit}
-            handleEdit={handleEdit}
-          />
-          <ListOfTodos
-            todos={todos}
-            clearItems={clearItems}
-            deleteItem={deleteItem}
-            handleEdit={handleEdit}
-          />
+          {!userLogin ? (
+            <LoginForm />
+          ) : (
+            <div className="todoFormWrapper">
+              <Typography variant="h5" color="initial">
+                Your Todo lists
+              </Typography>
+              <ToDoForm
+                inputText={inputText}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                itemToEdit={itemToEdit}
+                handleEdit={handleEdit}
+              />
+              <ListOfTodos
+                todos={todos}
+                clearItems={clearItems}
+                deleteItem={deleteItem}
+                handleEdit={handleEdit}
+              />
+            </div>
+          )}
         </Card>
       </Box>
     </Container>
