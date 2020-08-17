@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ToDoForm from "./ToDoForm";
-import ListOfTodos from "./ListOfTodos";
-import Alert from "./Alert";
-import { v4 as uuidv4 } from "uuid";
-import LoginForm from "./LoginForm";
 
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
+
+import { v4 as uuidv4 } from "uuid";
+
+import ToDoForm from "../components/ToDoForm";
+import ListOfTodos from "../components/ListOfTodos";
+import Alert from "../components/Alert";
+import LoginForm from "./LoginForm";
+
 const mainTodos = localStorage.getItem("todos")
   ? JSON.parse(localStorage.getItem("todos"))
   : [];
@@ -26,11 +29,11 @@ const ToDo = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (inputText === "")
       return handleAlert({
@@ -39,7 +42,7 @@ const ToDo = () => {
       });
 
     if (itemToEdit) {
-      const tempTodos = todos.map((item) => {
+      const tempTodos = todos.map(item => {
         return item.id === id ? { ...todos, task: inputText } : item;
         //if id matches then it will only update taks field and rest item will be used
       });
@@ -74,16 +77,16 @@ const ToDo = () => {
     handleAlert({ type: "danger", text: "all items deleted" });
   };
 
-  const deleteItem = (id) => {
-    let temp = todos.filter((item) => item.id !== id);
+  const deleteItem = id => {
+    let temp = todos.filter(item => item.id !== id);
     setTodos(temp);
     handleAlert({ type: "danger", text: "item deleted" });
     setInputText("");
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = id => {
     //console.log(id);
-    const singleItem = todos.find((item) => item.id === id);
+    const singleItem = todos.find(item => item.id === id);
     setItemToEdit(true);
     setId(id);
     setInputText(singleItem.task);

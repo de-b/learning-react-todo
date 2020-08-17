@@ -1,7 +1,8 @@
 import React from "react";
-import "../App.css";
-import AppBar from "./AppBar";
-import ToDo from "./ToDo";
+
+import "./App.css";
+import AppBar from "./components/AppBar";
+import ToDo from "./views/ToDo";
 
 function App() {
   return (
