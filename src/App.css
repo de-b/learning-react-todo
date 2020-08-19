@@ -40,3 +40,8 @@ button.btn {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+.white {
+  color: #fff;
+  text-decoration: none;
+}

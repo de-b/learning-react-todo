@@ -17,7 +17,7 @@ const mainTodos = localStorage.getItem("todos")
   : [];
 
 const ToDo = () => {
-  const [userLogin, setUserLogin] = useState(false);
+  //const [userLogin, setUserLogin] = useState(false);
   const [todos, setTodos] = useState(mainTodos);
   const [inputText, setInputText] = useState("");
   const [alert, setAlert] = useState({ show: false });
@@ -29,11 +29,11 @@ const ToDo = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText === "")
       return handleAlert({
@@ -42,7 +42,7 @@ const ToDo = () => {
       });
 
     if (itemToEdit) {
-      const tempTodos = todos.map(item => {
+      const tempTodos = todos.map((item) => {
         return item.id === id ? { ...todos, task: inputText } : item;
         //if id matches then it will only update taks field and rest item will be used
       });
@@ -77,16 +77,16 @@ const ToDo = () => {
     handleAlert({ type: "danger", text: "all items deleted" });
   };
 
-  const deleteItem = id => {
-    let temp = todos.filter(item => item.id !== id);
+  const deleteItem = (id) => {
+    let temp = todos.filter((item) => item.id !== id);
     setTodos(temp);
     handleAlert({ type: "danger", text: "item deleted" });
     setInputText("");
   };
 
-  const handleEdit = id => {
+  const handleEdit = (id) => {
     //console.log(id);
-    const singleItem = todos.find(item => item.id === id);
+    const singleItem = todos.find((item) => item.id === id);
     setItemToEdit(true);
     setId(id);
     setInputText(singleItem.task);
@@ -97,28 +97,24 @@ const ToDo = () => {
       <Box m={3}>
         {alert.show && <Alert alert={alert} />}
         <Card style={{ padding: "25px" }}>
-          {!userLogin ? (
-            <LoginForm />
-          ) : (
-            <div className="todoFormWrapper">
-              <Typography variant="h5" color="initial">
-                Your Todo lists
-              </Typography>
-              <ToDoForm
-                inputText={inputText}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                itemToEdit={itemToEdit}
-                handleEdit={handleEdit}
-              />
-              <ListOfTodos
-                todos={todos}
-                clearItems={clearItems}
-                deleteItem={deleteItem}
-                handleEdit={handleEdit}
-              />
-            </div>
-          )}
+          <div className="todoFormWrapper">
+            <Typography variant="h5" color="initial">
+              Your Todo lists
+            </Typography>
+            <ToDoForm
+              inputText={inputText}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              itemToEdit={itemToEdit}
+              handleEdit={handleEdit}
+            />
+            <ListOfTodos
+              todos={todos}
+              clearItems={clearItems}
+              deleteItem={deleteItem}
+              handleEdit={handleEdit}
+            />
+          </div>
         </Card>
       </Box>
     </Container>
