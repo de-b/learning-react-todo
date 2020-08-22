@@ -14,13 +14,8 @@ import LoginForm from "./LoginForm";
 
 import { database } from "../firebase";
 
-const mainTodos = localStorage.getItem("todos")
-  ? JSON.parse(localStorage.getItem("todos"))
-  : [];
-
 const ToDo = () => {
-  //const [userLogin, setUserLogin] = useState(false);
-  const [todos, setTodos] = useState(mainTodos);
+  const [todos, setTodos] = useState([]);
   const [inputText, setInputText] = useState("");
   const [alert, setAlert] = useState({ show: false });
   const [itemToEdit, setItemToEdit] = useState(false);
@@ -35,7 +30,16 @@ const ToDo = () => {
     database.ref("shopping").on("value", snapshot => {
       const s = snapshot.val();
       if (s) {
-        console.log(s);
+        // Converting the todo items to array to not break current implementation
+        // TODO: should render todo list with key value
+        const todosFromFirebase = Object.keys(s).map(key => ({
+          id: key,
+          task: s[key],
+          category: "shopping",
+        }));
+        console.log(todosFromFirebase);
+
+        setTodos(todosFromFirebase);
       }
     });
   }, []);

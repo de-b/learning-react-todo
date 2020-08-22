@@ -14,10 +14,10 @@ function App() {
     <Router>
       <AppBar />
       <Switch>
-        <Route path="/" exact component={LoginForm} />
+        <Route path="/login" exact component={LoginForm} />
         <Route path="/forgot-password" exact component={ForgotPassword} />
         <Route path="/register" exact component={Register} />
-        <Route path="/todo" exact component={ToDo} />
+        <Route path="/" exact component={ToDo} />
       </Switch>
     </Router>
   );
