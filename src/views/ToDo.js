@@ -12,6 +12,8 @@ import ListOfTodos from "../components/ListOfTodos";
 import Alert from "../components/Alert";
 import LoginForm from "./LoginForm";
 
+import { database } from "../firebase";
+
 const mainTodos = localStorage.getItem("todos")
   ? JSON.parse(localStorage.getItem("todos"))
   : [];
@@ -29,11 +31,20 @@ const ToDo = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    database.ref("shopping").on("value", snapshot => {
+      const s = snapshot.val();
+      if (s) {
+        console.log(s);
+      }
+    });
+  }, []);
+
+  const handleChange = e => {
     setInputText(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (inputText === "")
       return handleAlert({
@@ -42,7 +53,7 @@ const ToDo = () => {
       });
 
     if (itemToEdit) {
-      const tempTodos = todos.map((item) => {
+      const tempTodos = todos.map(item => {
         return item.id === id ? { ...todos, task: inputText } : item;
         //if id matches then it will only update taks field and rest item will be used
       });
@@ -77,16 +88,16 @@ const ToDo = () => {
     handleAlert({ type: "danger", text: "all items deleted" });
   };
 
-  const deleteItem = (id) => {
-    let temp = todos.filter((item) => item.id !== id);
+  const deleteItem = id => {
+    let temp = todos.filter(item => item.id !== id);
     setTodos(temp);
     handleAlert({ type: "danger", text: "item deleted" });
     setInputText("");
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = id => {
     //console.log(id);
-    const singleItem = todos.find((item) => item.id === id);
+    const singleItem = todos.find(item => item.id === id);
     setItemToEdit(true);
     setId(id);
     setInputText(singleItem.task);

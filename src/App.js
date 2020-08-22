@@ -10,26 +10,14 @@ import ForgotPassword from "./views/ForgotPassword";
 import Register from "./views/Register";
 
 function App() {
-  const [userLogin, setUserLogin] = useState(false);
-
   return (
     <Router>
       <AppBar />
       <Switch>
-        <Route path="/" exact component={LoginForm}>
-          <LoginForm />
-        </Route>
-        <Route path="/forgot-password" exact component={ForgotPassword}>
-          <ForgotPassword />
-        </Route>
-        <Route path="/register" exact component={Register}>
-          <Register />
-        </Route>
-        {userLogin && (
-          <Route path="/todo" exact component={ToDo}>
-            <ToDo />
-          </Route>
-        )}
+        <Route path="/" exact component={LoginForm} />
+        <Route path="/forgot-password" exact component={ForgotPassword} />
+        <Route path="/register" exact component={Register} />
+        <Route path="/todo" exact component={ToDo} />
       </Switch>
     </Router>
   );
