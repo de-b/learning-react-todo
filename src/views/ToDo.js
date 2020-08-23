@@ -10,11 +10,11 @@ import { v4 as uuidv4 } from "uuid";
 import ToDoForm from "../components/ToDoForm";
 import ListOfTodos from "../components/ListOfTodos";
 import Alert from "../components/Alert";
-import LoginForm from "./LoginForm";
 
-const mainTodos = localStorage.getItem("todos")
-  ? JSON.parse(localStorage.getItem("todos"))
-  : [];
+import db from "../firebase/index";
+console.log("firebase db", db);
+
+const mainTodos = [];
 
 const ToDo = () => {
   //const [userLogin, setUserLogin] = useState(false);
@@ -24,17 +24,39 @@ const ToDo = () => {
   const [itemToEdit, setItemToEdit] = useState(false);
   const [id, setId] = useState(0);
 
-  useEffect(() => {
-    console.log("useEffect run");
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  // useEffect(() => {
+  //   console.log("useEffect run");
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
 
   const handleChange = (e) => {
     setInputText(e.target.value);
   };
+  useEffect(() => {
+    const todoRefgetData = db.database().ref("shopping");
+    // console.log("asdfadsfs", inputText);
+    // todoRef.on("value", (snap) => {
+    //   const todos = snap.val();
+    // });
+    todoRefgetData.on("value", (snap) => {
+      const todosList = snap.val();
+      console.log(todosList);
+      //console.log(todos);
+      for (let id in todosList) {
+        todos.push(todosList[id]);
+      }
+    });
+  }, [todos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const todoRef = db.database().ref("shopping");
+    todoRef.push({
+      category: "shopping",
+      id: uuidv4(),
+      task: inputText,
+      completed: false,
+    });
     if (inputText === "")
       return handleAlert({
         type: "danger",
