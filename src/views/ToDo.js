@@ -12,7 +12,6 @@ import ListOfTodos from "../components/ListOfTodos";
 import Alert from "../components/Alert";
 
 import db from "../firebase/index";
-console.log("firebase db", db);
 
 const mainTodos = [];
 
@@ -29,7 +28,7 @@ const ToDo = () => {
   //   localStorage.setItem("todos", JSON.stringify(todos));
   // }, [todos]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setInputText(e.target.value);
   };
   useEffect(() => {
@@ -38,17 +37,17 @@ const ToDo = () => {
     // todoRef.on("value", (snap) => {
     //   const todos = snap.val();
     // });
-    todoRefgetData.on("value", (snap) => {
+    todoRefgetData.on("value", snap => {
       const todosList = snap.val();
-      console.log(todosList);
-      //console.log(todos);
+      const tempTodos = [];
       for (let id in todosList) {
-        todos.push(todosList[id]);
+        tempTodos.push(todosList[id]);
       }
+      setTodos(tempTodos);
     });
-  }, [todos]);
+  }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const todoRef = db.database().ref("shopping");
     todoRef.push({
@@ -64,7 +63,7 @@ const ToDo = () => {
       });
 
     if (itemToEdit) {
-      const tempTodos = todos.map((item) => {
+      const tempTodos = todos.map(item => {
         return item.id === id ? { ...todos, task: inputText } : item;
         //if id matches then it will only update taks field and rest item will be used
       });
@@ -99,16 +98,16 @@ const ToDo = () => {
     handleAlert({ type: "danger", text: "all items deleted" });
   };
 
-  const deleteItem = (id) => {
-    let temp = todos.filter((item) => item.id !== id);
+  const deleteItem = id => {
+    let temp = todos.filter(item => item.id !== id);
     setTodos(temp);
     handleAlert({ type: "danger", text: "item deleted" });
     setInputText("");
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = id => {
     //console.log(id);
-    const singleItem = todos.find((item) => item.id === id);
+    const singleItem = todos.find(item => item.id === id);
     setItemToEdit(true);
     setId(id);
     setInputText(singleItem.task);
