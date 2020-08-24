@@ -9,21 +9,15 @@ function ListOfTodos(props) {
   return (
     <div style={{ marginTop: "40px" }}>
       <ul className="todoLists" style={{ listStyle: "none", padding: "0" }}>
-        {todos.map((item) => (
-          <ToDoItem
-            key={item.id}
-            id={item.id}
-            task={item.task}
-            deleteItem={() => deleteItem(item.id)}
-            handleEdit={() => handleEdit(item.id)}
-          />
+        {Object.keys(todos).map(key => (
+          <ToDoItem key={key} item={todos[key]} />
         ))}
       </ul>
-      {todos.length > 0 && (
+      {/* todos.length > 0 && (
         <Button onClick={clearItems} variant="contained" color="secondary">
           Clear List Items
         </Button>
-      )}
+          ) */}
     </div>
   );
 }

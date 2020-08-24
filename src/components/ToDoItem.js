@@ -2,13 +2,13 @@ import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
-const ToDoItem = ({ id, task, deleteItem, handleEdit }) => {
+const ToDoItem = ({ item, onDeleteItem, onEditItem }) => {
   return (
     <li>
-      <span>{task}</span>
+      <span>{item.name}</span>
       <span>
-        <DeleteIcon onClick={deleteItem} color="secondary" />
-        <EditIcon onClick={handleEdit} color="primary" />
+        <DeleteIcon onClick={onDeleteItem} color="secondary" />
+        <EditIcon onClick={onEditItem} color="primary" />
       </span>
     </li>
   );

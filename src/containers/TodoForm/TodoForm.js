@@ -1,33 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   fullWidth: {
     width: "100%",
     marginBottom: "20px",
   },
 }));
 
-function ToDoForm({ inputText, handleChange, handleSubmit, itemToEdit }) {
+const ToDoForm = ({ initalValue, onSubmit }) => {
   const classes = useStyles();
+  const [itemName, setItemName] = useState(initalValue || "");
+
+  const handleChange = e => {
+    setItemName(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (onSubmit) {
+      onSubmit(itemName);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} noValidate autoComplete="off">
-      {/* {itemToEdit ? JSON.stringify(itemToEdit) : "not editing"} */}
-
       <TextField
         className={classes.fullWidth}
         id="standard-basic"
         label="Add Todo item"
-        value={inputText}
+        value={itemName}
         onChange={handleChange}
+        autoFocus
       />
-      {/* <Button variant="outlined">Submit</Button> */}
-      <button className="btn">{itemToEdit ? "Edit" : "Submit"}</button>
+      <button className="btn" type="submit">
+        Submit
+      </button>
     </form>
   );
-}
+};
 
 export default ToDoForm;
