@@ -9,7 +9,7 @@ import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
 
 import Typography from "@material-ui/core/Typography";
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   fullWidth: {
     width: "100%",
     marginBottom: "20px",
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const LoginForm = () => {
   const classes = useStyles();
-  const preventDefault = (event) => event.preventDefault();
   return (
     <Container maxWidth="sm">
       <Box m={3}>

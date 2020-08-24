@@ -5,7 +5,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { database } from "../../firebase";
 
 const ToDoItem = ({ item, onEditItem }) => {
-  const { uuid, name, completed } = item;
+  const { uuid, name } = item;
 
   const handleDelete = uuid => e => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const ToDoItem = ({ item, onEditItem }) => {
 
   return (
     <li>
-      <span>{item.name}</span>
+      <span>{name}</span>
       <span>
         <DeleteIcon onClick={handleDelete(uuid)} color="secondary" />
         <EditIcon onClick={handleEdit(uuid)} color="primary" />
