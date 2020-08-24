@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
 import TodoForm from "../containers/TodoForm";
-import TodoContainer from "../containers/Todo";
+import TodoContainer from "../containers/TodoList";
 
 const ToDo = () => {
   return (

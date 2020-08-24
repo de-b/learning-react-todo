@@ -13,7 +13,6 @@ const TodoFormContainer = () => {
       name: itemName,
       completed: false,
     });
-    console.log("Handle", itemName);
   };
 
   return <TodoForm onSubmit={handleSave} initalValue="" />;

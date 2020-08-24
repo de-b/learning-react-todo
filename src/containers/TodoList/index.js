@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 
 import { database } from "../../firebase";
 
-import TodoList from "../../components/TodoList";
+import List from "./List";
 
 const DEFAULT_CATEGORY = "shopping";
 
@@ -27,7 +27,7 @@ const TodoContainer = () => {
         <Typography variant="h5" color="initial">
           Your Todo lists
         </Typography>
-        <TodoList todos={todos} />
+        <List todos={todos} />
       </div>
     </Card>
   );

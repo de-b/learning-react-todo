@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ToDoItem from "./ToDoItem";
+import Item from "./Item";
 
 import Button from "@material-ui/core/Button";
 
@@ -9,8 +9,14 @@ function ListOfTodos(props) {
   return (
     <div style={{ marginTop: "40px" }}>
       <ul className="todoLists" style={{ listStyle: "none", padding: "0" }}>
-        {Object.keys(todos).map(key => (
-          <ToDoItem key={key} item={todos[key]} />
+        {Object.keys(todos).map(uuid => (
+          <Item
+            key={uuid}
+            item={{
+              ...todos[uuid],
+              uuid,
+            }}
+          />
         ))}
       </ul>
       {/* todos.length > 0 && (
