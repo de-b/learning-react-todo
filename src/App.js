@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ForgotPassword from "./views/ForgotPassword";
 import Register from "./views/Register";
+import Categories from "./views/Categories";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/forgot-password" exact component={ForgotPassword} />
         <Route path="/register" exact component={Register} />
         <Route path="/" exact component={ToDo} />
+        <Route path="/categories" exact component={Categories} />
       </Switch>
     </Router>
   );
