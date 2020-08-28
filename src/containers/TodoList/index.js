@@ -8,7 +8,7 @@ import List from "./List";
 
 const DEFAULT_CATEGORY = "shopping";
 
-const TodoContainer = () => {
+const TodoContainer = ({ onEditItem }) => {
   const [todos, setTodos] = useState(undefined);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const TodoContainer = () => {
         <Typography variant="h5" color="initial">
           Your Todo lists
         </Typography>
-        <List todos={todos} />
+        <List todos={todos} onEditItem={onEditItem} />
       </div>
     </Card>
   );

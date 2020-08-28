@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -10,9 +10,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ToDoForm = ({ initalValue, onSubmit }) => {
+const ToDoForm = ({ initialValue, onSubmit }) => {
   const classes = useStyles();
-  const [itemName, setItemName] = useState(initalValue || "");
+  const [itemName, setItemName] = useState("");
 
   const handleChange = e => {
     setItemName(e.target.value);
@@ -24,6 +24,10 @@ const ToDoForm = ({ initalValue, onSubmit }) => {
       onSubmit(itemName);
     }
   };
+
+  useEffect(() => {
+    setItemName(initialValue || "");
+  }, [initialValue]);
 
   return (
     <form onSubmit={handleSubmit} noValidate autoComplete="off">

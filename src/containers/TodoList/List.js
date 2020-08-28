@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "./Item";
 
-function ListOfTodos({ todos }) {
+function List({ todos, onEditItem }) {
   return (
     <div style={{ marginTop: "40px" }}>
       <ul className="todoLists" style={{ listStyle: "none", padding: "0" }}>
@@ -12,6 +12,7 @@ function ListOfTodos({ todos }) {
               ...todos[uuid],
               uuid,
             }}
+            onEditItem={onEditItem}
           />
         ))}
       </ul>
@@ -19,4 +20,4 @@ function ListOfTodos({ todos }) {
   );
 }
 
-export default ListOfTodos;
+export default List;
