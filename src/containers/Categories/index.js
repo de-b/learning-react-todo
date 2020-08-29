@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
 
 import { database } from "../../firebase";
 
@@ -20,16 +18,7 @@ const Categories = () => {
     });
   }, []);
 
-  return (
-    <Card style={{ padding: "25px" }}>
-      <div className="todoFormWrapper">
-        <Typography variant="h5" color="initial">
-          Categories
-        </Typography>
-        <CategoryList categories={categories} />
-      </div>
-    </Card>
-  );
+  return <CategoryList categories={categories} />;
 };
 
 export default Categories;

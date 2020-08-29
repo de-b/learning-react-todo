@@ -8,9 +8,7 @@ import Categories from "../containers/Categories";
 const CategoriesView = () => {
   return (
     <Container maxWidth="sm">
-      <Box m={3}>
-        <Categories />
-      </Box>
+      <Categories />
     </Container>
   );
 };
