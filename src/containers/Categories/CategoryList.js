@@ -8,7 +8,12 @@ import Box from "@material-ui/core/Box";
 import CategoryItem from "./CategoryItem";
 import CategoryModal from "../../components/CategoryModal";
 
-const CategoryList = ({ categories, onAddCategory, onEditCategory }) => {
+const CategoryList = ({
+  categories,
+  onAddCategory,
+  onEditCategory,
+  onDeleteCategory,
+}) => {
   const [showModel, setShowModel] = useState(false);
 
   const handleAddCategory = category => {
@@ -42,6 +47,7 @@ const CategoryList = ({ categories, onAddCategory, onEditCategory }) => {
                 categoryId: key,
               }}
               onEdit={onEditCategory}
+              onDelete={onDeleteCategory}
             />
           ))}
         </List>

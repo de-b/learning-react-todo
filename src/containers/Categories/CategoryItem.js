@@ -10,8 +10,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import CategoryModel from "../../components/CategoryModal";
+import ConfirmDialog from "../../components/ConfirmDialog";
 
-const CategoryList = ({ category, onEdit }) => {
+const CategoryList = ({ category, onEdit, onDelete }) => {
   const { categoryId, name, description } = category;
   const [showEdit, setShowEdit] = useState(false);
 
@@ -33,6 +34,14 @@ const CategoryList = ({ category, onEdit }) => {
     setShowEdit(false);
   };
 
+  const handleDelete = () => {
+    onDelete({
+      id: categoryId,
+      name,
+      description,
+    });
+  };
+
   return (
     <Fragment>
       <ListItem button dense component={Link} to={`/${categoryId}`}>
@@ -50,9 +59,15 @@ const CategoryList = ({ category, onEdit }) => {
           >
             <EditIcon />
           </IconButton>
-          <IconButton edge="end" aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
+          <ConfirmDialog
+            title="Delete Category"
+            message="Are you sure you want to delete category?"
+            onConfirm={handleDelete}
+          >
+            <IconButton edge="end" aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </ConfirmDialog>
         </ListItemSecondaryAction>
       </ListItem>
 

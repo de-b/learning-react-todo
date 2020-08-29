@@ -25,7 +25,6 @@ const Categories = () => {
   };
 
   const handleEditCategory = updatedCategory => {
-    console.log(">>>>>>>>>>>>", updatedCategory);
     const { id, name, description } = updatedCategory;
 
     database.ref(`/${CATEGORY_KEY}/${id}`).set({
@@ -34,11 +33,17 @@ const Categories = () => {
     });
   };
 
+  const handleDeleteCategory = categoryToDelete => {
+    const { id } = categoryToDelete;
+    database.ref(`/${CATEGORY_KEY}/${id}`).set(null);
+  };
+
   return (
     <CategoryList
       categories={categories}
       onAddCategory={handleAddCategory}
       onEditCategory={handleEditCategory}
+      onDeleteCategory={handleDeleteCategory}
     />
   );
 };
