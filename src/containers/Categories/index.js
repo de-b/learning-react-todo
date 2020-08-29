@@ -24,8 +24,22 @@ const Categories = () => {
     database.ref(`/${CATEGORY_KEY}/${categoryUuid}`).set(newCategory);
   };
 
+  const handleEditCategory = updatedCategory => {
+    console.log(">>>>>>>>>>>>", updatedCategory);
+    const { id, name, description } = updatedCategory;
+
+    database.ref(`/${CATEGORY_KEY}/${id}`).set({
+      name,
+      description,
+    });
+  };
+
   return (
-    <CategoryList categories={categories} onAddCategory={handleAddCategory} />
+    <CategoryList
+      categories={categories}
+      onAddCategory={handleAddCategory}
+      onEditCategory={handleEditCategory}
+    />
   );
 };
 
