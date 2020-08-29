@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "./Item";
 
-function List({ todos, onEditItem }) {
+function List({ categoryId, todos, onEditItem }) {
   return (
     <div style={{ marginTop: "40px" }}>
       <ul className="todoLists" style={{ listStyle: "none", padding: "0" }}>
@@ -13,6 +13,7 @@ function List({ todos, onEditItem }) {
               uuid,
             }}
             onEditItem={onEditItem}
+            categoryId={categoryId}
           />
         ))}
       </ul>

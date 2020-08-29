@@ -18,8 +18,9 @@ function App() {
         <Route path="/login" exact component={LoginForm} />
         <Route path="/forgot-password" exact component={ForgotPassword} />
         <Route path="/register" exact component={Register} />
-        <Route path="/" exact component={ToDo} />
+        <Route path="/" exact component={Categories} />
         <Route path="/categories" exact component={Categories} />
+        <Route path="/category/:id" exact component={ToDo} />
       </Switch>
     </Router>
   );

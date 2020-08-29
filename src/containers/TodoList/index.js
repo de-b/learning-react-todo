@@ -3,16 +3,13 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 
 import { database } from "../../firebase";
-
 import List from "./List";
 
-const DEFAULT_CATEGORY = "shopping";
-
-const TodoContainer = ({ onEditItem }) => {
+const TodoContainer = ({ categoryId, onEditItem }) => {
   const [todos, setTodos] = useState(undefined);
 
   useEffect(() => {
-    database.ref(DEFAULT_CATEGORY).on("value", snapshot => {
+    database.ref(`/items/${categoryId}`).on("value", snapshot => {
       const s = snapshot.val();
       if (s) {
         setTodos(s);
@@ -27,7 +24,7 @@ const TodoContainer = ({ onEditItem }) => {
         <Typography variant="h5" color="initial">
           Your Todo lists
         </Typography>
-        <List todos={todos} onEditItem={onEditItem} />
+        <List todos={todos} onEditItem={onEditItem} categoryId={categoryId} />
       </div>
     </Card>
   );

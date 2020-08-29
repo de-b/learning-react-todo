@@ -4,8 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import TodoForm from "./TodoForm";
 import { database } from "../../firebase";
 
-const DEFAULT_CATEGORY = "shopping";
-
 // this function will return same uuid if item exists
 const getItemUuid = item => {
   if (item) {
@@ -21,7 +19,7 @@ const getItemUuid = item => {
  * These props value type can be set using `prop-types`. Please read further on prop-types
  *
  */
-const TodoFormContainer = ({ itemToEdit, onDone }) => {
+const TodoFormContainer = ({ categoryId, itemToEdit, onDone }) => {
   const [initialValue, setInitialValue] = useState("");
 
   // on form is submitted this component saves data to firebase
@@ -29,7 +27,7 @@ const TodoFormContainer = ({ itemToEdit, onDone }) => {
   const handleSave = itemName => {
     const uuid = getItemUuid(itemToEdit);
 
-    database.ref(`${DEFAULT_CATEGORY}/${uuid}`).set({
+    database.ref(`/items/${categoryId}/${uuid}`).set({
       name: itemName,
       completed: false,
     });

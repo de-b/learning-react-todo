@@ -44,7 +44,7 @@ const CategoryList = ({ category, onEdit, onDelete }) => {
 
   return (
     <Fragment>
-      <ListItem button dense component={Link} to={`/${categoryId}`}>
+      <ListItem button dense component={Link} to={`/category/${categoryId}`}>
         <ListItemAvatar>
           <Avatar>
             <FolderIcon />

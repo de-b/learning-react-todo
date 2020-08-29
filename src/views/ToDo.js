@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -15,6 +16,8 @@ const ToDo = () => {
   // After edit is completed again form will let this view know to clear itemToEdit
   const [itemToEdit, setItemToEdit] = useState(undefined);
 
+  const { id: categoryId } = useParams();
+
   const handleDone = () => {
     setItemToEdit(null);
   };
@@ -26,8 +29,12 @@ const ToDo = () => {
   return (
     <Container maxWidth="sm">
       <Box m={3}>
-        <TodoForm itemToEdit={itemToEdit} onDone={handleDone} />
-        <TodoContainer onEditItem={handleEditItem} />
+        <TodoForm
+          itemToEdit={itemToEdit}
+          onDone={handleDone}
+          categoryId={categoryId}
+        />
+        <TodoContainer onEditItem={handleEditItem} categoryId={categoryId} />
       </Box>
     </Container>
   );

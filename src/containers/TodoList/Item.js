@@ -4,12 +4,12 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { database } from "../../firebase";
 
-const ToDoItem = ({ item, onEditItem }) => {
+const ToDoItem = ({ categoryId, item, onEditItem }) => {
   const { uuid, name } = item;
 
   const handleDelete = uuid => e => {
     e.preventDefault();
-    database.ref(`shopping/${uuid}`).set(null);
+    database.ref(`items/${categoryId}/${uuid}`).set(null);
   };
 
   const handleEdit = uuid => e => {
