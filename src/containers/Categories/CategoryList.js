@@ -8,11 +8,12 @@ import Box from "@material-ui/core/Box";
 import CategoryItem from "./CategoryItem";
 import CategoryModal from "../../components/CategoryModal";
 
-const CategoryList = ({ categories }) => {
+const CategoryList = ({ categories, onAddCategory }) => {
   const [showModel, setShowModel] = useState(false);
 
   const handleAddCategory = category => {
-    console.log(category);
+    onAddCategory(category);
+    setShowModel(false);
   };
 
   const handleToggleModel = show => () => {

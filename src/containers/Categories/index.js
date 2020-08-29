@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { database } from "../../firebase";
 
@@ -18,7 +19,14 @@ const Categories = () => {
     });
   }, []);
 
-  return <CategoryList categories={categories} />;
+  const handleAddCategory = newCategory => {
+    const categoryUuid = uuidv4();
+    database.ref(`/${CATEGORY_KEY}/${categoryUuid}`).set(newCategory);
+  };
+
+  return (
+    <CategoryList categories={categories} onAddCategory={handleAddCategory} />
+  );
 };
 
 export default Categories;
